@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Calendar";
+  src: url("../asssets/fonts/Calendar.otf");
+}
+
+html,
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  padding: 20px 0;
+}
