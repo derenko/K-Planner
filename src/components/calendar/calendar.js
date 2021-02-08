@@ -38,12 +38,7 @@ export const Calendar = ({ dates, onClickDay, onChangeMonth }) => {
       nextLabel={<RightCircleOutlined />}
       onClickDay={onClickDay}
       onActiveStartDateChange={({ activeStartDate }) => {
-        /*
-         activeStartDate month value is from 0 to 11
-         we use values from 1 to 12
-         so we need to add 1 to get month 
-        */
-        onChangeMonth(getMonth(activeStartDate) + 1);
+        onChangeMonth(getMonth(activeStartDate));
       }}
     />
   );

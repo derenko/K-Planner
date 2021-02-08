@@ -118,3 +118,7 @@
 .react-calendar__navigation__arrow.react-calendar__navigation__prev2-button {
   display: none;
 }
+
+.react-calendar__navigation__label {
+  pointer-events: none;
+}

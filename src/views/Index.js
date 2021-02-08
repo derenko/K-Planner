@@ -1,9 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Row, Col, Divider } from "antd";
 
 import { Calendar } from "../components/calendar/calendar";
 import { EditingModal } from "../components/editing-modal";
-import { formatDate, isSameDay, getMonth } from "../utils/dates";
+import {
+  formatDate,
+  getMonth,
+  findDate,
+  filterDatesByMonth,
+} from "../utils/dates";
 import { AddingModal } from "../components/adding-modal";
 import { context, ACTION_TYPES } from "../context";
 import { StatisticCards } from "../components/statistic";
@@ -19,12 +24,19 @@ export const Index = () => {
   const { dates } = state;
 
   const [mode, setMode] = useState(MODE.NONE);
+
   const [selectedDate, setSelectedDate] = useState({
     date: null,
     cash: 0,
   });
 
-  const [selectedMonth, setSelectedMonth] = useState(getMonth() + 1);
+  const [selectedMonth, setSelectedMonth] = useState(getMonth());
+
+  const [datesForMonth, setDatesForMonth] = useState([]);
+
+  useEffect(() => {
+    setDatesForMonth(filterDatesByMonth(dates, selectedMonth));
+  }, [dates, selectedMonth]);
 
   const onClickDay = (selectedDate) => {
     let dateToSet = {
@@ -32,7 +44,7 @@ export const Index = () => {
       cash: 0,
     };
 
-    const dateToEdit = dates.find(({ date }) => isSameDay(date, selectedDate));
+    const dateToEdit = findDate(dates, selectedDate);
 
     if (dateToEdit) {
       dateToSet = { ...dateToEdit };
@@ -90,7 +102,7 @@ export const Index = () => {
         </Col>
         <Divider />
         <Col span={22}>
-          <StatisticCards {...{ dates, selectedMonth }} />
+          <StatisticCards {...{ dates: datesForMonth }} />
         </Col>
       </Row>
       <Row>

@@ -12,14 +12,10 @@ import {
   getTotalWorkingHours,
 } from "../../utils/statistic";
 
-import { filterDatesByMonth } from "../../utils/dates";
-
-export const StatisticCards = ({ dates, selectedMonth }) => {
-  const filteredDates = filterDatesByMonth(dates, selectedMonth);
-
-  const totalCash = getTotalCash(filteredDates);
-  const totalWorkingDays = getTotalWorkingDays(filteredDates);
-  const totalWorkingHours = getTotalWorkingHours(filteredDates);
+export const StatisticCards = ({ dates }) => {
+  const totalCash = getTotalCash(dates);
+  const totalWorkingDays = getTotalWorkingDays(dates);
+  const totalWorkingHours = getTotalWorkingHours(dates);
 
   const valueStyle = { color: "#6675A9" };
 

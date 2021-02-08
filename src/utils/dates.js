@@ -16,11 +16,13 @@ export const isSameDay = (first, second) => {
 };
 
 export const getMonth = (date = moment()) => {
-  return moment(date).month();
+  return moment(date, DATE_FORMAT).month() + 1;
 };
 
 export const filterDatesByMonth = (dates, month) => {
-  return dates.filter((date) => {
-    return getMonth(date) === month;
-  });
+  return dates.filter((date) => getMonth(date.date) === month);
+};
+
+export const findDate = (dates, dateToFind) => {
+  return dates.find(({ date }) => isSameDay(date, dateToFind));
 };
